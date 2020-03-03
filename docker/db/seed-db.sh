@@ -6,8 +6,8 @@ set -eu
 
 echo "Seeding database ..."
 
-readonly RUN_STATES=('start' 'complete' 'fail' 'abort')
-readonly RUNS=10
+readonly BASE_URL="http://${MARQUEZ_HOST}:${MARQUEZ_PORT}/api/v1"
+echo "${BASE_URL}"
 
 # NAMESPACES
 cat ./data/namespaces.json | jq -c '.[]' | \
@@ -15,7 +15,7 @@ cat ./data/namespaces.json | jq -c '.[]' | \
     namespace=$(echo "${i}" | jq -r '.name')
     payload=$(echo "${i}" | jq -c '{ownerName: .ownerName, description: .description}')
 
-    curl --silent --output /dev/null -X PUT "http://${MARQUEZ_HOST}:${MARQUEZ_PORT}/api/v1/namespaces/${namespace}" \
+    curl --silent --output /dev/null -X PUT "${BASE_URL}/namespaces/${namespace}" \
       -H 'Content-Type: application/json' \
       -d "${payload}"
   done
@@ -27,7 +27,7 @@ cat ./data/sources.json | jq -c '.[]' | \
     source=$(echo "${i}" | jq -r '.name')
     payload=$(echo "${i}" | jq -c '{type: .type, connectionUrl: .connectionUrl, description: .description}')
 
-    curl --silent --output /dev/null -X PUT "http://${MARQUEZ_HOST}:${MARQUEZ_PORT}/api/v1/sources/${source}" \
+    curl --silent --output /dev/null -X PUT "${BASE_URL}/sources/${source}" \
       -H 'Content-Type: application/json' \
       -d "${payload}"
   done
@@ -36,11 +36,11 @@ cat ./data/sources.json | jq -c '.[]' | \
 
 cat ./data/datasets.json | jq -c '.[]' | \
   while read -r i; do
-    namespace=$(echo "${i}" | jq -r '.namespace')
+    namespace=$(echo "${i}" | jq -r '.namespaceName')
     dataset=$(echo "${i}" | jq -r '.name')
     payload=$(echo "${i}" | jq -c '{type: .type, physicalName: .physicalName, sourceName: .sourceName, fields: .fields, description: .description}')
 
-    curl --silent --output /dev/null -X PUT "http://${MARQUEZ_HOST}:${MARQUEZ_PORT}/api/v1/namespaces/${namespace}/datasets/${dataset}" \
+    curl --silent --output /dev/null -X PUT "${BASE_URL}/namespaces/${namespace}/datasets/${dataset}" \
       -H 'Content-Type: application/json' \
       -d "${payload}"
   done
@@ -49,29 +49,32 @@ cat ./data/datasets.json | jq -c '.[]' | \
 
 cat ./data/jobs.json | jq -c '.[]' | \
   while read -r i; do
-    namespace=$(echo "${i}" | jq -r '.namespace')
+    namespace=$(echo "${i}" | jq -r '.namespaceName')
     job=$(echo "${i}" | jq -r '.name')
     payload=$(echo "${i}" | jq -c '{type: .type, inputs: .inputs, outputs: .outputs, location: .location, context: .context, description: .description}')
 
-    curl --silent --output /dev/null -X PUT "http://${MARQUEZ_HOST}:${MARQUEZ_PORT}/api/v1/namespaces/${namespace}/jobs/${job}" \
+    curl --silent --output /dev/null -X PUT "${BASE_URL}/namespaces/${namespace}/jobs/${job}" \
       -H 'Content-Type: application/json' \
       -d "${payload}"
+  done
 
-    if [[ "( $RANDOM % 2 )" -ge 0 ]]; then
-      n=0
-      runs=$(( $RANDOM % $RUNS ))
-      while [[ "${n}" -lt $runs ]]; do
-        response=$(curl --silent -X POST "http://${MARQUEZ_HOST}:${MARQUEZ_PORT}/api/v1/namespaces/${namespace}/jobs/${job}/runs" \
-          -H 'Content-Type: application/json' \
-          -d "{}")
-        if [[ "( $RANDOM % 2 )" -ne 0 ]]; then
-          run_id=$(echo "${response}" | jq -r '.runId')
-          mark_run_as=${RUN_STATES[($RANDOM % 4)]}
-          curl --silent --output /dev/null -X POST "http://${MARQUEZ_HOST}:${MARQUEZ_PORT}/api/v1/jobs/runs/${run_id}/${mark_run_as}"
-        fi
-        n=$((n + 1))
-      done
-    fi
+# RUNS
+
+cat ./data/runs.json | jq -c '.[]' | \
+  while read -r i; do
+    namespace=$(echo "${i}" | jq -r '.namespaceName')
+    job=$(echo "${i}" | jq -r '.jobName')
+    payload=$(echo "${i}" | jq -c '{runArgs: .runArgs}')
+
+    response=$(curl --silent -X POST "${BASE_URL}/namespaces/${namespace}/jobs/${job}/runs" \
+      -H 'Content-Type: application/json' \
+      -d "${payload}")
+
+    run_id=$(echo "${response}" | jq -r '.runId')
+    run_states=( $(echo "${i}" | jq -r '.runStates[]') )
+    for mark_run_as in "${run_states[@]}"; do
+      curl --silent --output /dev/null -X POST "${BASE_URL}/jobs/runs/${run_id}/${mark_run_as}"
+    done
   done
 
 echo "DONE!"

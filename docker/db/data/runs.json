@@ -1,0 +1,74 @@
+[
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "orders_7_days",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "delivery_times_7_days",
+    "runArgs": {},
+    "runStates": ["start", "fail"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "etl_restaurants",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "etl_orders",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "etl_customers",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "etl_order_status",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "orders_popular_day_of_week",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "email_discounts",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "orders_popular_day_of_week",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "etl_delivery_7_days",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "etl_menus",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  },
+  {
+    "namespaceName": "food_delivery",
+    "jobName": "etl_drivers",
+    "runArgs": {},
+    "runStates": ["start", "complete"]
+  }
+]

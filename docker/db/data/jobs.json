@@ -1,185 +1,134 @@
 [
   {
-    "name": "calculate.galaxy_dimensions",
-    "namespace": "default",
-    "inputs": ["galaxy.geometry"],
-    "outputs": ["galaxy.dimensions"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_dimensions.sql",
-    "description": "calculates all possible dimensions from input geometry",
     "type": "BATCH",
-    "context": {
-      "SQL": "\n-- THIS IS SAMPLE SQL\n\n    SELECT 0 AS num UNION ALL\n    SELECT 1 UNION ALL\n    SELECT 2 UNION ALL\n    SELECT 3 UNION ALL\n    SELECT 4 UNION ALL\n    SELECT 5 UNION ALL\n    SELECT 6 UNION ALL\n    SELECT 7 UNION ALL\n    SELECT 8 UNION ALL\n    SELECT 9\n)\n\n, numbers_100 AS\n(\n   FROM the_whole_flippin_universe"
-    }
-  },
-  {
-    "name": "calculate.galaxy_trips",
-    "namespace": "default",
-    "inputs": ["galaxy.dimensions"],
-    "outputs": ["galaxy.trips"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates trips taken in the galaxy",
-    "type": "BATCH"
-  },
-  {
-    "name": "calculate.earth_dimensions",
-    "namespace": "galactic-data",
-    "inputs": ["earth.dimensions"],
-    "outputs": ["earth.trips"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates the dimensions of earth",
-    "type": "BATCH",
-    "context": {
-      "SQL": "\n-- THIS IS SAMPLE SQL\n\n    SELECT 0 AS num UNION ALL\n    SELECT 1 UNION ALL\n    SELECT 2 UNION ALL\n    SELECT 3 UNION ALL\n    SELECT 4 UNION ALL\n    SELECT 5 UNION ALL\n    SELECT 6 UNION ALL\n    SELECT 7 UNION ALL\n    SELECT 8 UNION ALL\n    SELECT 9\n)\n\n, numbers_100 AS\n(\n   FROM the_whole_flippin_universe"
-    }
-  },
-  {
-    "name": "calculate.universe",
-    "namespace": "galactic-data",
-    "inputs": ["objects.stars", "objects.planets", "objects.life"],
-    "outputs": ["environment.universe"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates the entire universe",
-    "type": "BATCH"
-  },
-  {
-    "name": "calculate.communications",
-    "namespace": "galactic-data",
-    "inputs": ["galaxy.radiowaves", "galaxy.satellites"],
-    "outputs": ["environment.conversations", "environment.transcripts"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates all communications in the galaxy",
-    "type": "BATCH"
-  },
-  {
-    "name": "calculate.nothing",
-    "namespace": "galactic-data",
+    "name": "etl_menus",
     "inputs": [],
-    "outputs": [],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
-    "type": "BATCH"
-  },
-  {
-    "name": "build.rocket",
-    "namespace": "galactic-data",
-    "inputs": ["rocket.parts"],
-    "outputs": ["rocket.types"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
-    "type": "BATCH",
+    "outputs": ["public.menus", "public.categories"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_menus.py",
+    "namespaceName": "food_delivery",
+    "description": "Loads newly added restaurant menus daily.",
     "context": {
-      "SQL": "\n-- THIS IS SAMPLE SQL\n\n    SELECT 0 AS num UNION ALL\n    SELECT 1 UNION ALL\n    SELECT 2 UNION ALL\n    SELECT 3 UNION ALL\n    SELECT 4 UNION ALL\n    SELECT 5 UNION ALL\n    SELECT 6 UNION ALL\n    SELECT 7 UNION ALL\n    SELECT 8 UNION ALL\n    SELECT 9\n)\n\n, numbers_100 AS\n(\n   FROM the_whole_flippin_universe"
+      "sql": "INSERT INTO menus (*) VALUES (...);"
     }
   },
   {
-    "name": "build.space_station",
-    "namespace": "galactic-data",
-    "inputs": ["station.parts"],
-    "outputs": ["station.types"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
-    "type": "BATCH"
-  },
-  {
-    "name": "build.aliens",
-    "namespace": "galactic-data",
-    "inputs": ["alien.parts"],
-    "outputs": ["alien.types"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
-    "type": "BATCH"
-  },
-  {
-    "name": "calculate.interstellar_dimensions",
-    "namespace": "interstellar-data",
-    "inputs": ["interstellar.geometry"],
-    "outputs": ["interstellar.dimensions"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_dimensions.sql",
-    "description": "calculates all possible dimensions from interstellar dimensions",
     "type": "BATCH",
-    "context": {
-      "SQL": "\n-- THIS IS SAMPLE SQL\n\n    SELECT 0 AS num UNION ALL\n    SELECT 1 UNION ALL\n    SELECT 2 UNION ALL\n    SELECT 3 UNION ALL\n    SELECT 4 UNION ALL\n    SELECT 5 UNION ALL\n    SELECT 6 UNION ALL\n    SELECT 7 UNION ALL\n    SELECT 8 UNION ALL\n    SELECT 9\n)\n\n, numbers_100 AS\n(\n   FROM the_whole_flippin_universe"
-    }
-  },
-  {
-    "name": "calculate.interstellar_trips",
-    "namespace": "interstellar-data",
-    "inputs": ["interstellar.dimensions"],
-    "outputs": ["interstellar.trips"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates trips taken in the interstellar world",
-    "type": "BATCH"
-  },
-  {
-    "name": "calculate.cosmic_dimensions",
-    "namespace": "interstellar-data",
-    "inputs": ["interstellar.trips"],
-    "outputs": ["cosmic.dimensions"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates the dimensions of the cosmics",
-    "type": "BATCH",
-    "context": {
-      "SQL": "\n-- THIS IS SAMPLE SQL\n\n    SELECT 0 AS num UNION ALL\n    SELECT 1 UNION ALL\n    SELECT 2 UNION ALL\n    SELECT 3 UNION ALL\n    SELECT 4 UNION ALL\n    SELECT 5 UNION ALL\n    SELECT 6 UNION ALL\n    SELECT 7 UNION ALL\n    SELECT 8 UNION ALL\n    SELECT 9\n)\n\n, numbers_100 AS\n(\n   FROM the_whole_flippin_universe"
-    }
-  },
-  {
-    "name": "calculate.cosmic_universe",
-    "namespace": "interstellar-data",
-    "inputs": ["cosmic.stars", "cosmic.planets", "cosmic.life"],
-    "outputs": ["cosmic.universe"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates the entire cosmic universe",
-    "type": "BATCH"
-  },
-  {
-    "name": "calculate.cosmic_communications",
-    "namespace": "interstellar-data",
-    "inputs": ["cosmic.radiowaves", "cosmic.satellites"],
-    "outputs": ["interstellar.conversations", "interstellar.transcripts"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates all communications in the cosmics",
-    "type": "BATCH"
-  },
-  {
-    "name": "cosmic.nothing",
-    "namespace": "interstellar-data",
+    "name": "etl_restaurants",
     "inputs": [],
-    "outputs": [],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
-    "type": "BATCH",
+    "outputs": ["public.restaurants"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_restaurants.py",
+    "namespaceName": "food_delivery",
+    "description": "Loads newly registered restaurants daily.",
     "context": {
-      "SQL": "\n-- THIS IS SAMPLE SQL\n\n    SELECT 0 AS num UNION ALL\n    SELECT 1 UNION ALL\n    SELECT 2 UNION ALL\n    SELECT 3 UNION ALL\n    SELECT 4 UNION ALL\n    SELECT 5 UNION ALL\n    SELECT 6 UNION ALL\n    SELECT 7 UNION ALL\n    SELECT 8 UNION ALL\n    SELECT 9\n)\n\n, numbers_100 AS\n(\n   FROM the_whole_flippin_universe"
+      "sql": "INSERT INTO restaurants (id, created_at, updated_at, name, email, address, phone, city_id, business_hours_id, description)\n    SELECT id, created_at, updated_at, name, email, address, phone, city_id, business_hours_id, description\n        FROM tmp_restaurants;"
     }
   },
   {
-    "name": "build.comets",
-    "namespace": "interstellar-data",
-    "inputs": ["comet.parts"],
-    "outputs": ["comet.types"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
-    "type": "BATCH"
-  },
-  {
-    "name": "build.black_holes",
-    "namespace": "interstellar-data",
-    "inputs": ["black_hole.parts"],
-    "outputs": ["black_hole.types"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
-    "type": "BATCH"
-  },
-  {
-    "name": "build.worm_holes",
-    "namespace": "interstellar-data",
-    "inputs": ["worm_hole.parts"],
-    "outputs": ["worm_hole.types"],
-    "location": "https://github.com/Galaxy/blob/ecfc04de65137bfd25a0416d227eaba5325c8c63/calculate.galaxy_trips.sql",
-    "description": "calculates literally nothing!",
     "type": "BATCH",
+    "name": "etl_orders",
+    "inputs": [],
+    "outputs": ["public.orders"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_orders.py",
+    "namespaceName": "food_delivery",
+    "description": "Loads newly placed orders daily.",
     "context": {
-      "SQL": "\n-- THIS IS SAMPLE SQL\n\n    SELECT 0 AS num UNION ALL\n    SELECT 1 UNION ALL\n    SELECT 2 UNION ALL\n    SELECT 3 UNION ALL\n    SELECT 4 UNION ALL\n    SELECT 5 UNION ALL\n    SELECT 6 UNION ALL\n    SELECT 7 UNION ALL\n    SELECT 8 UNION ALL\n    SELECT 9\n)\n\n, numbers_100 AS\n(\n   FROM the_whole_flippin_universe"
+      "sql": "INSERT INTO orders (*) VALUES (...);"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "orders_7_days",
+    "inputs": ["public.menus", "public.categories", "public.cities", "public.orders"],
+    "outputs": ["public.top_orders"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/orders_7_days.py",
+    "namespaceName": "food_delivery",
+    "description": "Determine weekly top orders by city.",
+    "context": {
+      "sql": "SELECT * FROM restaurants, cities, orders;"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "etl_customers",
+    "inputs": [],
+    "outputs": ["public.customers"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_customers.py",
+    "namespaceName": "food_delivery",
+    "description": "Loads newly registered customers daily.",
+    "context": {
+      "sql": "INSERT INTO customers (id, created_at, updated_at, name, email, phone, city_id)\n    SELECT id, created_at, updated_at, name, email, phone, city_id\n        FROM tmp_customers;"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "etl_order_status",
+    "inputs": [],
+    "outputs": ["public.order_status"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_order_status.py",
+    "namespaceName": "food_delivery",
+    "description": "Loads order statues updates hourly.",
+    "context": {
+      "sql": "INSERT INTO order_status (*) VALUES (...);"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "etl_drivers",
+    "inputs": [],
+    "outputs": ["public.drivers"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_drivers.py",
+    "namespaceName": "food_delivery",
+    "description": "Loads newly registered drivers daily.",
+    "context": {
+      "sql": "INSERT INTO drivers (*) VALUES (...);"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "etl_delivery_7_days",
+    "inputs": ["public.top_orders", "public.customers", "public.order_status", "public.drivers", "public.restaurants"],
+    "outputs": ["public.delivery_7_days"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_delivery_7_days.py",
+    "namespaceName": "food_delivery",
+    "description": "Loads new deliveries for the week.",
+    "context": {
+      "sql": "INSERT INTO delivery_7_days (*) VALUES (...);"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "delivery_times_7_days",
+    "inputs": ["public.delivery_7_days"],
+    "outputs": ["public.top_delivery_times", "public.discounts"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/delivery_times_7_days.py",
+    "namespaceName": "food_delivery",
+    "description": "Determine weekly top delivery times by city.",
+    "context": {
+      "sql": "SELECT * FROM delivery_7_days;"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "email_discounts",
+    "inputs": ["public.discounts"],
+    "outputs": [],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/email_discounts.py",
+    "namespaceName": "food_delivery",
+    "description": "Email discounts to customers that have expereinced order delays.",
+    "context": {
+      "sql": "SELECT * FROM discounts;"
+    }
+  },
+  {
+    "type": "BATCH",
+    "name": "orders_popular_day_of_week",
+    "inputs": ["public.top_delivery_times", "public.business_hours"],
+    "outputs": ["public.popular_orders_day_of_week"],
+    "location": "https://github.com/DatakinHQ/datakin/blob/0c6a0d63668afd8227eae92edbca93d6bbc974c1/examples/food-delivery/etl_restaurants.py",
+    "namespaceName": "food_delivery",
+    "description": "Determines the popular day of week orders are placed.",
+    "context": {
+      "sql": "SELECT * FROM top_orders, top_delivery_times, popular_orders_day_of_week;"
     }
   }
 ]
